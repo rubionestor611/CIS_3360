@@ -97,6 +97,9 @@ public class hw1 {
     }
     public static void printPlaintxt(String txt){
         System.out.println("Plaintext:");
+        formattedPrint(txt);
+    }
+    public static void formattedPrint(String txt){
         for(int i = 0; i < txt.length(); i++){
             System.out.print(txt.charAt(i));
             if(i % 80 == 79){
