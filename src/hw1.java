@@ -34,8 +34,21 @@ public class hw1 {
         //and numbers
         String plaintxt = readPlaintxt(args[1]);
         printPlaintxt(plaintxt);
-
-        //encrypt
+        /*
+        encrypt
+        a b c  x
+        d e f  y
+        g h i  z
+        a*x + b*y + c*z
+        d*x + e*y + f*z
+        g*x + h*y + i*z
+        lmn%26
+        opq%26
+        rst%26
+        u
+        v
+        w
+         */
 
         //print ciphertext
     }
@@ -97,6 +110,10 @@ public class hw1 {
     }
     public static void printPlaintxt(String txt){
         System.out.println("Plaintext:");
+        formattedPrint(txt);
+    }
+    public static void printCiphertxt(String txt){
+        System.out.println("Ciphertext:");
         formattedPrint(txt);
     }
     public static void formattedPrint(String txt){
