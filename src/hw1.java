@@ -33,29 +33,15 @@ public class hw1 {
         //read and print plaintext, stripped of whitespace
         //and numbers
         String plaintxt = readPlaintxt(args[1]);
+        plaintxt = checkPadding(plaintxt, matrix.length);
         printPlaintxt(plaintxt);
-        /*
-        encrypt
-        a b c  x
-        d e f  y
-        g h i  z
-        a*x + b*y + c*z
-        d*x + e*y + f*z
-        g*x + h*y + i*z
-        lmn%26
-        opq%26
-        rst%26
-        u
-        v
-        w
-         */
 
-        //print ciphertext
+        hillCipher(plaintxt, matrix);
     }
     public static int[][] readMatrix(String matrixfile){
         //int[row][col]
         File key = new File(matrixfile);
-        int size =0;
+        int size;
         int[][] ret = new int[1][1];
         try {
             Scanner reader = new Scanner(key);
@@ -100,13 +86,18 @@ public class hw1 {
         for(String s : array){
             ret += s.toLowerCase();
         }
-        int remainder = ret.length() % 5;
+        return ret;
+    }
+    public static String checkPadding(String txt, int size){
+        int remainder = txt.length() % size;
+
         if(remainder != 0){
-            for(int i = 0; i < remainder; i++){
-                ret += "x";
+            int pad = size - remainder;
+            for(int i = 0; i < pad; i++){
+                txt += "x";
             }
         }
-        return ret;
+        return txt;
     }
     public static void printPlaintxt(String txt){
         System.out.println("Plaintext:");
@@ -123,7 +114,45 @@ public class hw1 {
                 System.out.print("\n");
             }
         }
+        System.out.print("\n");
     }
+    public static void hillCipher(String plaintxt, int[][] matrix){
+        int[][] blockofplain = new int[matrix.length][1];
+        String ciphertext = "";
+        int len = plaintxt.length();
+        System.out.println("len = " + len);
+        for(int i = 0; i < len; i++){
+            blockofplain[i % matrix.length][0] = plaintxt.charAt(i) - '0';
+            if(i % matrix.length == matrix.length - 1){
+                int[][] cipherblock =encryptBlock(blockofplain, matrix);
+                for(int k = 0; k < cipherblock.length; k++){
+                    ciphertext += letterforInt(cipherblock[k][0]);
+                }
+            }
+        }
+        printCiphertxt(ciphertext);
+    }
+    public static int[][] encryptBlock(int[][] plaintextblock, int[][] kmatrix){
+        int[][] cipherblock = new int[kmatrix.length][1];
+        for(int i = 0; i < kmatrix.length; i++){
+            for(int a = 0; a < 1; a++){
+                 cipherblock[i][a] = 0;
+                 for(int j = 0; j < kmatrix.length; j++){
+                     cipherblock[i][a] += (kmatrix[i][j] * plaintextblock[j][a]);
+                 }
+                 cipherblock[i][a] = cipherblock[i][a] % 26;
+            }
+        }
+        return cipherblock;
+    }
+    public static String letterforInt(int a){
+        char[] array = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        if(a < 0 || a > array.length){
+            return String.valueOf(a);
+        }
+        return String.valueOf(array[a]);
+    }
+
 }
 /*=============================================================================
 | I Nestor Rubio (ne458269) affirm that this program is
