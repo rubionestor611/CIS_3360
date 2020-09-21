@@ -62,13 +62,14 @@ public class hw1 {
         return ret;
     }
     public static void printMatrix(int[][] matrix, int len){
-        System.out.println("Matrix: ");
+        System.out.println("Key Matrix:");
         for(int i = 0; i < len; i++){
             for(int j = 0; j < len; j++){
                 System.out.print(matrix[i][j] + " ");
             }
-            System.out.println("\n");
+            System.out.print("\n");
         }
+        System.out.println("\n");
     }
     public static String readPlaintxt(String plaintxtfile){
         File plaintext = new File(plaintxtfile);
@@ -100,12 +101,12 @@ public class hw1 {
         return txt;
     }
     public static void printPlaintxt(String txt){
-        System.out.println("Plaintext:");
+        System.out.println("Plaintext:\n");
         formattedPrint(txt);
         System.out.print("\n");
     }
     public static void printCiphertxt(String txt){
-        System.out.println("Ciphertext:");
+        System.out.println("Ciphertext:\n");
         formattedPrint(txt);
     }
     public static void formattedPrint(String txt){
