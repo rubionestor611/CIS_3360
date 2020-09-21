@@ -122,9 +122,11 @@ public class hw1 {
         int len = plaintxt.length();
         System.out.println("len = " + len);
         for(int i = 0; i < len; i++){
-            blockofplain[i % matrix.length][0] = plaintxt.charAt(i) - '0';
+            int val = intforLetter(plaintxt.charAt(i));
+            blockofplain[i % matrix.length][0] = val;
+            System.out.println("block of plain : i = " + i + " : " + blockofplain[i % matrix.length][0]);
             if(i % matrix.length == matrix.length - 1){
-                int[][] cipherblock =encryptBlock(blockofplain, matrix);
+                int[][] cipherblock = encryptBlock(blockofplain, matrix);
                 for(int k = 0; k < cipherblock.length; k++){
                     ciphertext += letterforInt(cipherblock[k][0]);
                 }
@@ -141,16 +143,21 @@ public class hw1 {
                      cipherblock[i][a] += (kmatrix[i][j] * plaintextblock[j][a]);
                  }
                  cipherblock[i][a] = cipherblock[i][a] % 26;
+                System.out.println(cipherblock[i][a]);
             }
         }
         return cipherblock;
     }
     public static String letterforInt(int a){
         char[] array = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-        if(a < 0 || a > array.length){
+        if(a < 0 || a >= array.length){
             return String.valueOf(a);
         }
         return String.valueOf(array[a]);
+    }
+    public static int intforLetter(char c){
+        String array = "abcdefghijklmnopqrstuvwxyz";
+        return array.indexOf(c);
     }
 
 }
