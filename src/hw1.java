@@ -1,6 +1,3 @@
-import java.io.File;
-import java.util.Scanner;
-
 /*=============================================================================
 | Assignment: HW 01 – Encrypting a plaintext file using the Hill cipher in the key file
 |
@@ -24,6 +21,9 @@ import java.util.Scanner;
 | Due Date: per assignment
 |
 +=============================================================================*/
+import java.io.File;
+import java.util.Scanner;
+
 public class hw1 {
     public static void main(String[] args){
         //read in key matrix and print it
@@ -102,6 +102,7 @@ public class hw1 {
     public static void printPlaintxt(String txt){
         System.out.println("Plaintext:");
         formattedPrint(txt);
+        System.out.print("\n");
     }
     public static void printCiphertxt(String txt){
         System.out.println("Ciphertext:");
@@ -120,11 +121,9 @@ public class hw1 {
         int[][] blockofplain = new int[matrix.length][1];
         String ciphertext = "";
         int len = plaintxt.length();
-        System.out.println("len = " + len);
         for(int i = 0; i < len; i++){
             int val = intforLetter(plaintxt.charAt(i));
             blockofplain[i % matrix.length][0] = val;
-            System.out.println("block of plain : i = " + i + " : " + blockofplain[i % matrix.length][0]);
             if(i % matrix.length == matrix.length - 1){
                 int[][] cipherblock = encryptBlock(blockofplain, matrix);
                 for(int k = 0; k < cipherblock.length; k++){
@@ -143,7 +142,6 @@ public class hw1 {
                      cipherblock[i][a] += (kmatrix[i][j] * plaintextblock[j][a]);
                  }
                  cipherblock[i][a] = cipherblock[i][a] % 26;
-                System.out.println(cipherblock[i][a]);
             }
         }
         return cipherblock;
