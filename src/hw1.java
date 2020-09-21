@@ -23,7 +23,7 @@
 +=============================================================================*/
 import java.io.File;
 import java.util.Scanner;
-
+//check for ints
 public class hw1 {
     public static void main(String[] args){
         //read in key matrix and print it
@@ -85,7 +85,9 @@ public class hw1 {
         String[] array = str.split("\\W+");
         String ret = new String();
         for(String s : array){
-            ret += s.toLowerCase();
+            if(!Character.isDigit(s.charAt(0))){
+                ret += s.toLowerCase();
+            }
         }
         return ret;
     }
