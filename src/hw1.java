@@ -23,20 +23,22 @@
 +=============================================================================*/
 import java.io.File;
 import java.util.Scanner;
-//check for ints
+//stu: 0- correct,1- correct,2 - correct,3- passed
 public class hw1 {
     public static void main(String[] args){
         //read in key matrix and print it
         int[][] matrix = readMatrix(args[0]);
         printMatrix(matrix, matrix.length);
 
+
         //read and print plaintext, stripped of whitespace
         //and numbers
         String plaintxt = readPlaintxt(args[1]);
         plaintxt = checkPadding(plaintxt, matrix.length);
         printPlaintxt(plaintxt);
-
-        hillCipher(plaintxt, matrix);
+        System.out.print("\n");
+        String ciphertext = hillCipher(plaintxt, matrix);
+        printCiphertxt(ciphertext);
     }
     public static int[][] readMatrix(String matrixfile){
         //int[row][col]
@@ -62,12 +64,12 @@ public class hw1 {
         return ret;
     }
     public static void printMatrix(int[][] matrix, int len){
-        System.out.println("Key Matrix:");
+        System.out.println("Key Matrix:\n");
         for(int i = 0; i < len; i++){
             for(int j = 0; j < len; j++){
-                System.out.print(matrix[i][j] + " ");
+                System.out.print(matrix[i][j] + "  ");
             }
-            System.out.print("\n");
+            System.out.print("  \n");
         }
         System.out.println("\n");
     }
@@ -118,9 +120,9 @@ public class hw1 {
                 System.out.print("\n");
             }
         }
-        System.out.print("\n");
+        //System.out.print("\n");
     }
-    public static void hillCipher(String plaintxt, int[][] matrix){
+    public static String hillCipher(String plaintxt, int[][] matrix){
         int[][] blockofplain = new int[matrix.length][1];
         String ciphertext = "";
         int len = plaintxt.length();
@@ -134,7 +136,7 @@ public class hw1 {
                 }
             }
         }
-        printCiphertxt(ciphertext);
+        return ciphertext;
     }
     public static int[][] encryptBlock(int[][] plaintextblock, int[][] kmatrix){
         int[][] cipherblock = new int[kmatrix.length][1];
