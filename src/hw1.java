@@ -39,6 +39,7 @@ public class hw1 {
         System.out.print("\n");
         String ciphertext = hillCipher(plaintxt, matrix);
         printCiphertxt(ciphertext);
+        System.out.print("\n");
     }
     public static int[][] readMatrix(String matrixfile){
         //int[row][col]
