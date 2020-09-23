@@ -1,5 +1,5 @@
 /*=============================================================================
-| Assignment: HW 01 – Encrypting a plaintext file using the Hill cipher in the key file
+| Assignment: HW 01 â€“ Encrypting a plaintext file using the Hill cipher in the key file
 |
 | Author: Nestor Rubio
 | Language: Java
@@ -65,7 +65,7 @@ public class hw1 {
         return ret;
     }
     public static void printMatrix(int[][] matrix, int len){
-        System.out.println("Key Matrix:\n");
+        System.out.println("\n\nKey matrix:\n");
         for(int i = 0; i < len; i++){
             for(int j = 0; j < len; j++){
                 System.out.print(matrix[i][j] + "  ");
@@ -88,9 +88,7 @@ public class hw1 {
         String[] array = str.split("\\W+");
         String ret = new String();
         for(String s : array){
-            if(!Character.isDigit(s.charAt(0))){
-                ret += s.toLowerCase();
-            }
+            ret += s.replaceAll("[0-9]","").toLowerCase();
         }
         return ret;
     }
@@ -108,7 +106,7 @@ public class hw1 {
     public static void printPlaintxt(String txt){
         System.out.println("Plaintext:\n");
         formattedPrint(txt);
-        System.out.print("\n");
+        System.out.println("\n");
     }
     public static void printCiphertxt(String txt){
         System.out.println("Ciphertext:\n");
@@ -143,11 +141,11 @@ public class hw1 {
         int[][] cipherblock = new int[kmatrix.length][1];
         for(int i = 0; i < kmatrix.length; i++){
             for(int a = 0; a < 1; a++){
-                 cipherblock[i][a] = 0;
-                 for(int j = 0; j < kmatrix.length; j++){
-                     cipherblock[i][a] += (kmatrix[i][j] * plaintextblock[j][a]);
-                 }
-                 cipherblock[i][a] = cipherblock[i][a] % 26;
+                cipherblock[i][a] = 0;
+                for(int j = 0; j < kmatrix.length; j++){
+                    cipherblock[i][a] += (kmatrix[i][j] * plaintextblock[j][a]);
+                }
+                cipherblock[i][a] = cipherblock[i][a] % 26;
             }
         }
         return cipherblock;
