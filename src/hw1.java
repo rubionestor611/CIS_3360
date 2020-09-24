@@ -1,5 +1,5 @@
 /*=============================================================================
-| Assignment: HW 01 â€“ Encrypting a plaintext file using the Hill cipher in the key file
+| Assignment: HW 01 – Encrypting a plaintext file using the Hill cipher in the key file
 |
 | Author: Nestor Rubio
 | Language: Java
