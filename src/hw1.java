@@ -1,5 +1,5 @@
 /*=============================================================================
-| Assignment: HW 01 – Encrypting a plaintext file using the Hill cipher in the key file
+| Assignment: HW 01 - Encrypting a plaintext file using the Hill cipher in the key file
 |
 | Author: Nestor Rubio
 | Language: Java
@@ -23,7 +23,6 @@
 +=============================================================================*/
 import java.io.File;
 import java.util.Scanner;
-//stu: 0- correct,1- correct,2 - correct,3- passed
 public class hw1 {
     public static void main(String[] args){
         //read in key matrix and print it
