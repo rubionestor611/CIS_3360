@@ -125,11 +125,9 @@ public class checksum {
             pairA = asciiValue(txt.charAt(i));
             pairA = pairA << 8;
             pairA += asciiValue(txt.charAt(i + 1));
-            System.out.println("A: " + Integer.toBinaryString(pairA));
             pairB = asciiValue(txt.charAt(i + 2));
             pairB = pairB << 8;
             pairB += asciiValue(txt.charAt(i + 3));
-            System.out.println("B: " + Integer.toBinaryString(pairB));
             pairsadded = pairA + pairB;
             pairsadded %= modval;
             ret += pairsadded;
@@ -137,20 +135,17 @@ public class checksum {
         }
         int need = len % 4;
         if(need == 1){
-            System.out.println("need: " + need);
             pairA = asciiValue(txt.charAt(len - 1));
             pairA = pairA << 8;
             ret += pairA;
             ret %= modval;
         }else if(need == 2){
-            System.out.println("need: " + need);
             pairA = asciiValue(txt.charAt(len - 2));
             pairA = pairA << 8;
             pairA += asciiValue(txt.charAt(len - 1));
             ret += pairA;
             ret %= modval;
         }else if(need == 3){
-            System.out.println("need: " + need);
             pairA = asciiValue(txt.charAt(len - 3));
             pairA = pairA << 8;
             pairA += asciiValue(txt.charAt(len - 2));
