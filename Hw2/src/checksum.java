@@ -21,12 +21,19 @@ public class checksum {
 
     private static String padifNecessary(String inputtxt, int modvalue) {
         int need = inputtxt.length() % modvalue;
+        if(modvalue == 4){
+            need = modvalue - need;
+            while(need != 0){
+                inputtxt += 'X';
+                need--;
+            }
+            return inputtxt;
+        }
         while(need != 0){
             inputtxt += 'X';
             need--;
         }
         return inputtxt;
-
     }
 
     public static String readInputFile(String input){
@@ -76,8 +83,7 @@ public class checksum {
         System.out.println("");
     }
     public static void printFinal(int x, int y, int z){
-        System.out.println(x +" bit checksum is " + Integer.toHexString(y) + " for all " +
-                z + " chars\n");
+        System.out.println(x +" bit checksum is " + Integer.toHexString(y) + " for all " + z + " chars\n");
     }
     public static int doCheckSum(String txt, int bitSize){
         int checksumvalue = -1;
@@ -160,18 +166,37 @@ public class checksum {
         /*
         add every 4 letter modding by 2_147_483_647
          */
-        int ret = 0;
+        long ret = 0L;
         int len = txt.length();
-        for(int i = 0; i <= len - 2; i += 2){
-            System.out.println(txt.charAt(i + 1) + "+" + txt.charAt(i) + '=' + (asciiValue(txt.charAt(i + 1)) + asciiValue(txt.charAt(i))));
-            ret += (asciiValue(txt.charAt(i + 1)) + asciiValue(txt.charAt(i)));
-            ret %= 2_147_483_647;
+        long setA = 0L;
+        long modval = Integer.MAX_VALUE;
+        for(int i = 0; i <= len - 4; i += 4){
+            setA = 0L;
+            for(int j = 0; j < 4; j++){
+                if(setA + asciiValue(txt.charAt(i + j)) >= Integer.MAX_VALUE){
+                    System.out.println("could be overflow");
+                }
+                setA += asciiValue(txt.charAt(i + j));
+                if(j != 3){
+                    setA = setA << 8;
+                }
+                setA %= modval;
+            }
+            ret += setA;
+            System.out.println("ret: " + Long.toBinaryString(ret));
+            ret %= (modval);
         }
-        if(len % 2 != 0){
-            ret += asciiValue(txt.charAt(len -1));
-            ret %= 2_147_483_647;
+        int need = len % 4;
+        if(need != 0){
+            need = 4 - need;
+            System.out.println("need: " + need);
+            setA = 0;
+            for(int j = need; j > 0; j--){
+                setA += asciiValue(txt.charAt(txt.length() - j));
+                setA = setA << 8;
+            }
         }
-        return ret;
+        return (int) ret;
     }
 
 }
