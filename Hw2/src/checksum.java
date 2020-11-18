@@ -12,10 +12,11 @@ public class checksum {
         if(inputtxt == null){
             System.exit(-1);
         }
-        inputtxt = padifNecessary(inputtxt, inputsize / 8);
-        printFormat(inputtxt);
-        int checksum = doCheckSum(inputtxt, inputsize);
-        printFinal(inputsize, checksum, inputtxt.length());
+        String paddedinputtxt = padifNecessary(inputtxt, inputsize / 8);
+
+        printFormat(paddedinputtxt);
+        int checksum = doCheckSum(paddedinputtxt, inputsize);
+        printFinal(inputsize, checksum, paddedinputtxt.length());
 
     }
 
@@ -65,14 +66,10 @@ public class checksum {
         }
     }
     public static boolean isValidChecksumSize(int n){
-        return switch (n) {
-            case 8 -> true;
-            case 16 -> true;
-            case 32 -> true;
-            default -> false;
-        };
+        return n == 8 || n == 16 || n == 32;
     }
     public static void printFormat(String s) {
+        System.out.print("\n");
         int len = s.length();
         for (int i = 0; i < len; i++) {
             System.out.print(s.charAt(i));
@@ -83,7 +80,7 @@ public class checksum {
         System.out.println("");
     }
     public static void printFinal(int x, int y, int z){
-        System.out.println(x +" bit checksum is " + Integer.toHexString(y) + " for all " + z + " chars\n");
+        System.out.print(x +" bit checksum is " + Integer.toHexString(y) + " for all " + z + " chars\n");
     }
     public static int doCheckSum(String txt, int bitSize){
         int checksumvalue = -1;
