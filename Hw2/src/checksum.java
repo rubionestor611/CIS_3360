@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class checksum {
@@ -11,7 +12,6 @@ public class checksum {
         if(inputtxt == null){
             System.exit(-1);
         }
-        System.out.println("inputsize = " + inputsize + "\ntextlength = " + inputtxt.length());
         inputtxt = padifNecessary(inputtxt, inputsize / 8);
         printFormat(inputtxt);
         int checksum = doCheckSum(inputtxt, inputsize);
@@ -170,31 +170,30 @@ public class checksum {
         int len = txt.length();
         long setA = 0L;
         long modval = Integer.MAX_VALUE;
+        ArrayList<Long> al = new ArrayList<>();
         for(int i = 0; i <= len - 4; i += 4){
             setA = 0L;
             for(int j = 0; j < 4; j++){
-                if(setA + asciiValue(txt.charAt(i + j)) >= Integer.MAX_VALUE){
-                    System.out.println("could be overflow");
-                }
                 setA += asciiValue(txt.charAt(i + j));
                 if(j != 3){
                     setA = setA << 8;
                 }
                 setA %= modval;
             }
-            ret += setA;
-            System.out.println("ret: " + Long.toBinaryString(ret));
+            al.add(setA);
             ret %= (modval);
         }
         int need = len % 4;
         if(need != 0){
             need = 4 - need;
-            System.out.println("need: " + need);
-            setA = 0;
             for(int j = need; j > 0; j--){
                 setA += asciiValue(txt.charAt(txt.length() - j));
                 setA = setA << 8;
             }
+            al.add(setA);
+        }
+        for(int i =0 ; i < al.size(); i++){
+            ret += al.get(i);
         }
         return (int) ret;
     }
