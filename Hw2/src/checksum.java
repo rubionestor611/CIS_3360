@@ -1,3 +1,27 @@
+/*=============================================================================
+| Assignment: HW 02 – Calculating the 8, 16, or 32 bit checksum for a
+|             given input file
+|
+| Author: Nestor Rubio
+| Language: Java
+|
+| To Compile: javac Hw02.java
+|
+| To Execute: java Hw02 textfile.txt checksum_size
+|             where the files in the command line are in the current directory.
+|
+|             The text file contains text is mixed case with spaces, punctuation,
+|             and is terminated by the hexadecimal ‘0A’, inclusive.
+|             (The 0x’0A’ is included in the checksum calculation.)
+|
+|             The checksum_size contains digit(s) expressing the checksum size
+|             of either 8, 16, or 32 bits
+|
+| Class: CIS3360 - Security in Computing - Fall 2020
+| Instructor: McAlpin
+| Due Date: per assignment
+|
++=============================================================================*/
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -195,5 +219,12 @@ public class checksum {
         }
         return (int) ret;
     }
-
 }
+/*=============================================================================
+| I Nestor Rubio (4834890) affirm that this program is
+| entirely my own work and that I have neither developed my code together with
+| any another person, nor copied any code from any other person, nor permitted
+| my code to be copied or otherwise used by any other person, nor have I
+| copied, modified, or otherwise used programs created by others. I acknowledge
+| that any violation of the above terms will be treated as academic dishonesty.
++=============================================================================*/
