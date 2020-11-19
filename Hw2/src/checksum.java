@@ -189,6 +189,7 @@ public class checksum {
             }
             al.add(setA);
         }
+
         for(int i =0 ; i < al.size(); i++){
             ret += al.get(i);
         }
